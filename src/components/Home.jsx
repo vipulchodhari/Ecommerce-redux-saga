@@ -4,7 +4,7 @@ import { ProductList } from '../redux/action/productAction';
 
 export const Home = () => {
     const { data } = useSelector((state) => ({
-        data: state.ProductState.data
+        data: state.productState.data
     }))
 
     console.warn("saga data", data);
@@ -32,10 +32,27 @@ export const Home = () => {
         dispatch(ProductList(product))
     }
     return <div className="home-container">
-        <button onClick={moveCart}>Add to Cart</button>
-        <button onClick={RemoveCart}>Remove to Cart</button>
-        <button onClick={EmptyCart}>Empty Cart</button>
+        
+        <button className='product-btn' onClick={EmptyCart}>Empty Cart</button>
 
-        <button onClick={getProduct}>Get Product</button>
+        <button className='product-btn' onClick={getProduct}>Get Product</button>
+
+        <div className='product-cont'>
+            {data.map((el, i) => {
+                return <div key={i} className='product-item'>
+                    <img src={el.img} alt=''/>
+                    <h3>{el.details}</h3>
+                    <div className='product-details'>
+                        <p>{el.price}</p>
+                        <p>{el.amount}</p>
+                        <p className='discount'>{el.discount} %OFF</p>
+                    </div>
+                    <div className='product-btn-container'>
+                        <button className='product-btn' onClick={moveCart}>Add to Cart</button>
+                        <button className='product-btn' onClick={RemoveCart}>Remove to Cart</button>
+                    </div>
+                </div>
+            })}
+        </div>
     </div>
 }

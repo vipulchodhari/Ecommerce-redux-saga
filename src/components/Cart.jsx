@@ -7,7 +7,7 @@ export const Cart = () => {
     }))
 
 
-    console.log('redux data in cart', data.length);
+    // console.log('redux data in cart', data.length);
     return <div className='cart-container'>
         <h1 className='heading'>Ecommorce</h1>
         <span>{data.length}</span>

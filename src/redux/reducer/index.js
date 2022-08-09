@@ -4,5 +4,5 @@ import { productReducer } from "./product";
 
 export const rootReducer = combineReducers({
     dataState: dataReducer,
-    ProductState: productReducer
+    productState: productReducer
 })
