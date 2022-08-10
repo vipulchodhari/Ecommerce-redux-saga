@@ -73,6 +73,7 @@
 .product-item{
   border: 1px solid lightgray;
   background-color: rgb(235, 231, 231);
+  border-radius: 8px;
 }
 .product-item>img{
   width: 100%;

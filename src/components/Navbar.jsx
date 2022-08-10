@@ -11,7 +11,7 @@ export const Navbar = () => {
     console.log('redux data in cart', data);
     return <div className='navbar-container'>
         <div className='navbar-heading'>
-            <h1 >Ecommorce</h1>
+            <h1 >Ecommerce</h1>
             <Link className='navbar-home' to='/'><p>Home</p></Link>
         </div>
         <span>{data.length}</span>
