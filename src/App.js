@@ -1,13 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
-import { Cart } from './components/Cart';
+import { Routes, Route } from 'react-router-dom';
 import { Home } from './components/Home';
+import { Navbar } from './components/Navbar';
+import { Cart } from './components/Cart';
 
 function App() {
   return (
     <div className="App">
-      <Cart/>
-      <Home/>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/cart' element={<Cart />}></Route>
+      </Routes>
+      
     </div>
   );
 }

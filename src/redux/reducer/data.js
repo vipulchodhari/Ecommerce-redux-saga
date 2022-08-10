@@ -10,17 +10,16 @@ export const dataReducer = (state=init_state, {type, payload}) => {
             // console.log("add to cart", state);
             return{
                 ...state,
-                // data: addToCart(...state.data, payload)
+                // data: addToCart(state.data, payload)
                 data: [...state.data, payload]
             }
         case REMOVE_FROM_CART:
-            // console.log("remove form cart", state);
-            console.log('data length', state.data.length);
-            state.data.length=state.data.length ? state.data.length-1 : []
+            // console.log('data length', state.data.length);
+            // state.data.length=state.data.length ? state.data.length-1 : []
             return{
                 ...state,
-                // data: removeToCart(state.data, payload)
-                data: [...state.data]
+                data: removeToCart(state.data, payload)
+                // data: [...state.data]
             }
         case EMPTY_CART:
             return{
@@ -33,6 +32,10 @@ export const dataReducer = (state=init_state, {type, payload}) => {
     }
 }
 
-// const removeToCart = (data) => {
-//     return data
+// const addToCart = (data, key) => {
+//     return data.filter((item) => item.id === key.id)
 // }
+
+const removeToCart = (data, key) => {
+    return data.filter((item) => item.id!==key.id)
+}

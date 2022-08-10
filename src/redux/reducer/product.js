@@ -14,7 +14,7 @@ export const productReducer = (state=init_state, action) => {
         //         data: payload
         //     }
         case SET_PRODUCT_LIST:
-            console.log('SET product reducer', action)
+            // console.log('SET product reducer', action)
             return{
                 ...state,
                 data: [...action.data]
