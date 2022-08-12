@@ -19,6 +19,10 @@ export const Cart = () => {
     const RemoveCart = (el) => {
         dispatch(Remove_From_Cart(el))
     }
+    
+    const increaseQuantity = (id) => {
+
+    }
 
     let totalAmount = 0;
     let totalPrice = 0;
@@ -49,7 +53,11 @@ export const Cart = () => {
                             <hr />
                             <div className='cart-move'>
                                 <p onClick={() => RemoveCart(item)}><span><RiDeleteBin6Line /></span>&nbsp;REMOVE</p>
-                                <p>|&nbsp;&nbsp;&nbsp;&nbsp; MOVE TO SHORTLIST</p>
+                                <div className='cart-item-quantity'>
+                                    <button>-</button>
+                                    <input onChange={() => increaseQuantity(item.id)} type='number' placeholder='1'/>
+                                    <button>+</button>
+                                </div>    
                             </div>
                         </div>
                         <div className='cart-vertical-line'></div>
