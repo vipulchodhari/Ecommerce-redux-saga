@@ -246,36 +246,3 @@
 .cart-right-cont > div:nth-child(3){
   color: green;
 }
-.cart-item-quantity{
-  display: flex;
-    justify-content: right;
-    margin-top: 8px;
-    height: 33px;
-}
-.cart-item-quantity > input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: green;
-  opacity: 5; /* Firefox */
-  font-weight: 600;
-}
-.cart-item-quantity > input{
-  width: 23%;
-  border: 1px solid gray;
-  outline: 0px;
-  color: black;
-  text-align: center;
-}
-/* Chrome, Safari, Edge, Opera */
-.cart-item-quantity > input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* Firefox */
-.cart-item-quantity > input[type=number] {
-  -moz-appearance: textfield;
-}
-
-.cart-item-quantity > button{
-  width: 18%;
-  font-size: 20px;
-}
