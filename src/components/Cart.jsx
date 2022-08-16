@@ -58,6 +58,7 @@ export const Cart = () => {
                                     <input onChange={() => increaseQuantity(item.id)} type='number' placeholder='1'/>
                                     <button>+</button>
                                 </div>   
+                                <p onClick={() => RemoveCart(item)}><span><RiDeleteBin6Line /></span>&nbsp;REMOVE</p> 
                             </div>
                         </div>
                         <div className='cart-vertical-line'></div>
