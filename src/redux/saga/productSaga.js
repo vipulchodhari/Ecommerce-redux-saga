@@ -11,7 +11,7 @@ function* getProducts(){
 }
 
 function* productSaga(){ 
-    yield takeEvery(PRODUCT_LIST, getProducts)
+    yield takeEvery(PRODUCT_LIST, getProducts)    
 }
 
 export default productSaga;

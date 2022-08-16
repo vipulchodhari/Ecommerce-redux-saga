@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Add_To_Cart, Empty_Cart, Remove_From_Cart } from '../redux/action/cartAction';
@@ -10,6 +11,7 @@ export const Home = () => {
 
     // console.warn("saga data", data);
     const dispatch = useDispatch();
+    const [show, setShow] = useState(true);
     const product = {
         id: 1,
         name: 'maruti',
@@ -22,8 +24,10 @@ export const Home = () => {
     }, [])
 
     const moveCart = (item) => {
-        dispatch(Add_To_Cart(item))
-
+        if(show){
+            dispatch(Add_To_Cart(item))
+            setShow(false);
+        }
         alert("Your Item add to cart")
     }
 
@@ -55,7 +59,7 @@ export const Home = () => {
                         <p className='discount'>{el.discount}%OFF</p>
                     </div>
                     <div className='product-btn-container'>
-                        <button className='product-btn' onClick={() => moveCart(el)}>Add to Cart</button>
+                        <button className='product-btn' onClick={() => moveCart(el)}>{show ? 'Add to Cart': 'Added'}</button>
                         {/* <button className='product-btn' onClick={() => RemoveCart(el.id)}>Remove to Cart</button> */}
                     </div>
                 </div>

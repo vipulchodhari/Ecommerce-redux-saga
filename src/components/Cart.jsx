@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Empty_Cart, Remove_From_Cart } from "../redux/action/cartAction";
 
 export const Cart = () => {
+    const [quantity, setQuantity] = useState(1);
+    // const [price, setPrice] = useState(0);
     const { data } = useSelector((state) => ({
         data: state.dataState.data
     }))
@@ -21,7 +24,16 @@ export const Cart = () => {
     }
 
     const increaseQuantity = (id) => {
+      setQuantity(quantity+1)
+      
+    }
 
+    const decreaseQuantity = (id) => {
+        if(quantity>1){
+            setQuantity(quantity-1)
+        }else{
+            dispatch(EmptyCart())
+        }
     }
 
     let totalAmount = 0;
@@ -40,6 +52,8 @@ export const Cart = () => {
         <div className="cart-main-cont">
             <div className="cart-left-cont">
                 {data.map(item => {
+                    let price = +item.price;
+                    let amount = +item.amount;
                     return <div className="cart-left-top">
                         <div>
                             <div className='cart-move'>
@@ -54,17 +68,16 @@ export const Cart = () => {
                             <div className='cart-move'>
                                 <p onClick={() => RemoveCart(item)}><span><RiDeleteBin6Line /></span>&nbsp;REMOVE</p>
                                 <div className='cart-item-quantity'>
-                                    <button>-</button>
-                                    <input onChange={() => increaseQuantity(item.id)} type='number' placeholder='1'/>
-                                    <button>+</button>
-                                </div>   
-                                <p onClick={() => RemoveCart(item)}><span><RiDeleteBin6Line /></span>&nbsp;REMOVE</p> 
+                                    <button onClick={() => decreaseQuantity(item.img)}>-</button>
+                                    <input type='number' placeholder={quantity} disabled/>
+                                    <button onClick={() => increaseQuantity(item.img)}>+</button>
+                                </div> 
                             </div>
                         </div>
                         <div className='cart-vertical-line'></div>
-                        <div className='cart-right-top'>
-                            <h3>&#8377;{item.price}</h3>
-                            <p className='cart-mrp'>MRP&nbsp; &#8377;<spna className='cart-price'>{item.amount} </spna><span className='cart-off'>&nbsp; 21%OFF</span></p>
+                        <div className='cart-right-top'>    
+                            <h3>&#8377;{quantity>1? (price*quantity).toFixed(2):price}</h3>
+                            <p className='cart-mrp'>MRP&nbsp; &#8377;<spna className='cart-price'>{quantity>1? (amount*quantity).toFixed(2):amount} </spna><span className='cart-off'>&nbsp; 21%OFF</span></p>
                             <p>MRP Includes all taxes</p>
                             <p></p>
                         </div>
