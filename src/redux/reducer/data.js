@@ -8,6 +8,12 @@ export const dataReducer = (state=init_state, {type, payload}) => {
     switch(type){
         case ADD_TO_CART:
             // console.log("add to cart", state);
+            const item = state.data.find((data) => data.img === payload.img);
+            if (item) {
+                item.quantity += payload.quantity;
+            } else {
+                state.data.push(payload);
+            }
             return{
                 ...state,
                 // data: addToCart(state.data, payload)
