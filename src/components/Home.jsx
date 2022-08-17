@@ -12,23 +12,24 @@ export const Home = () => {
     // console.warn("saga data", data);
     const dispatch = useDispatch();
     const [show, setShow] = useState(true);
-    const product = {
-        id: 1,
-        name: 'maruti',
-        model: 'shift',
-        color: 'white'
-    }
+    // const product = {
+    //     id: 1,
+    //     name: 'maruti',
+    //     model: 'shift',
+    //     color: 'white'
+    // }
 
     useEffect(() => {
         dispatch(ProductList())
     }, [])
 
     const moveCart = (item) => {
-        if(show){
+        if(show === true){
             dispatch(Add_To_Cart(item))
-            setShow(false);
+
+            // alert("Your Item add to cart")
         }
-        alert("Your Item add to cart")
+        setShow(false);
     }
 
     // const RemoveCart = (item) => {
@@ -42,7 +43,7 @@ export const Home = () => {
     // const getProduct = () => {
         
     // }
-    return <div className="home-container">
+    return (<div className="home-container">
         
         {/* <button className='product-btn' onClick={EmptyCart}>Empty Cart</button> */}
         {/* <button className='product-btn' onClick={getProduct}>Get Product</button> */}
@@ -59,11 +60,11 @@ export const Home = () => {
                         <p className='discount'>{el.discount}%OFF</p>
                     </div>
                     <div className='product-btn-container'>
-                        <button className='product-btn' onClick={() => moveCart(el)}>{show ? 'Add to Cart': 'Added'}</button>
+                        <button className={show===true?'product-btn':'product-btn-added'} onClick={() => moveCart(el)}>{show === true ? 'Add to Cart': 'Added'}</button>
                         {/* <button className='product-btn' onClick={() => RemoveCart(el.id)}>Remove to Cart</button> */}
                     </div>
                 </div>
             })}
         </div>
-    </div>
+    </div>)
 }

@@ -93,7 +93,7 @@
 .product-details> p:nth-child(2){
   text-decoration: line-through;
 }
-.product-btn{
+.product-btn, .product-btn-added{
   background-color: rgb(255,112,67);
   padding: 10px 30px;
   border-radius: 3px;
@@ -102,8 +102,11 @@
   font-size: 15px;
   font-weight: 600;
   margin-top: 30px;
-  cursor: pointer;
+  cursor: no-drop;
   margin-left: 10px;
+}
+.product-btn{
+  cursor: pointer;
 }
 .product-btn-container{
   margin-top: -18px;
@@ -264,4 +267,24 @@ input::-webkit-inner-spin-button {
 .cart-item-quantity > button{
   width: 18%;
   font-size: 20px;
+}
+
+/* ----------------cart style end--------- */
+
+/* ------------page not found style start---------------- */
+.not-found{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;;
+  color: rgb(68,68,68);
+  min-height: 80vh;
+}
+.not-found>h1{
+  font-size: 50px;
+  margin-bottom: 0px;
+}
+.not-found>p{
+  font-size: 20px;
+  margin-top: -10px;
 }

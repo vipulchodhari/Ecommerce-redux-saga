@@ -3,15 +3,18 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Empty_Cart, Remove_From_Cart } from "../redux/action/cartAction";
+import { Increase_Quantity } from '../redux/action/quantityAction';
 
 export const Cart = () => {
     const [quantity, setQuantity] = useState(1);
     // const [price, setPrice] = useState(0);
-    const { data } = useSelector((state) => ({
-        data: state.dataState.data
+    const { data, quanData } = useSelector((state) => ({
+        data: state.dataState.data,
+        quanData: state.quantityState.quantityData
     }))
 
     console.log("data in cart", data);
+    console.log("quantity data in cart", quanData);
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
@@ -23,16 +26,17 @@ export const Cart = () => {
         dispatch(Remove_From_Cart(el))
     }
 
-    const increaseQuantity = (id) => {
+    const increaseQuantity = (id, item) => {
       setQuantity(quantity+1)
-      
+
+      dispatch(Increase_Quantity(item))
     }
 
-    const decreaseQuantity = (id) => {
+    const decreaseQuantity = (id, item) => {
         if(quantity>1){
             setQuantity(quantity-1)
         }else{
-            dispatch(EmptyCart())
+            dispatch(Remove_From_Cart(item))
         }
     }
 
@@ -41,6 +45,13 @@ export const Cart = () => {
     data.forEach(item => {
         totalAmount += +item.amount;
         totalPrice += +item.price;
+    })
+
+    let price = 0;
+    let amount = 0;
+    quanData.forEach(item => {
+        price += +item.price;
+        amount += +item.amount;
     })
 
     return <div className="cart-container">
@@ -52,8 +63,8 @@ export const Cart = () => {
         <div className="cart-main-cont">
             <div className="cart-left-cont">
                 {data.map(item => {
-                    let price = +item.price;
-                    let amount = +item.amount;
+                    // let price = +item.price;
+                    // let amount = +item.amount;
                     return <div className="cart-left-top">
                         <div>
                             <div className='cart-move'>
@@ -68,16 +79,16 @@ export const Cart = () => {
                             <div className='cart-move'>
                                 <p onClick={() => RemoveCart(item)}><span><RiDeleteBin6Line /></span>&nbsp;REMOVE</p>
                                 <div className='cart-item-quantity'>
-                                    <button onClick={() => decreaseQuantity(item.img)}>-</button>
+                                    <button onClick={() => decreaseQuantity(item.img, item)}>-</button>
                                     <input type='number' placeholder={quantity} disabled/>
-                                    <button onClick={() => increaseQuantity(item.img)}>+</button>
+                                    <button onClick={() => increaseQuantity(item.img, item)}>+</button>
                                 </div> 
                             </div>
                         </div>
                         <div className='cart-vertical-line'></div>
                         <div className='cart-right-top'>    
-                            <h3>&#8377;{quantity>1? (price*quantity).toFixed(2):price}</h3>
-                            <p className='cart-mrp'>MRP&nbsp; &#8377;<spna className='cart-price'>{quantity>1? (amount*quantity).toFixed(2):amount} </spna><span className='cart-off'>&nbsp; 21%OFF</span></p>
+                            <h3>&#8377;{item.price}</h3>
+                            <p className='cart-mrp'>MRP&nbsp; &#8377;<spna className='cart-price'>{amount} </spna><span className='cart-off'>&nbsp; 21%OFF</span></p>
                             <p>MRP Includes all taxes</p>
                             <p></p>
                         </div>
