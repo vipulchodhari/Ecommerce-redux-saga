@@ -1,20 +1,15 @@
-import { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { Empty_Cart, Remove_From_Cart } from "../redux/action/cartAction";
-import { Increase_Quantity } from '../redux/action/quantityAction';
+import { Change_Quantity, Empty_Cart, Remove_From_Cart } from "../redux/action/cartAction";
+import { mapToArray } from '../utils/common';
 
 export const Cart = () => {
-    const [quantity, setQuantity] = useState(1);
-    // const [price, setPrice] = useState(0);
-    const { data, quanData } = useSelector((state) => ({
+    const { data } = useSelector((state) => ({
         data: state.dataState.data,
-        quanData: state.quantityState.quantityData
     }))
 
     console.log("data in cart", data);
-    console.log("quantity data in cart", quanData);
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
@@ -26,32 +21,20 @@ export const Cart = () => {
         dispatch(Remove_From_Cart(el))
     }
 
-    const increaseQuantity = (id, item) => {
-      setQuantity(quantity+1)
-
-      dispatch(Increase_Quantity(item))
-    }
-
-    const decreaseQuantity = (id, item) => {
-        if(quantity>1){
-            setQuantity(quantity-1)
-        }else{
+    const changeQuantity = (item, change, quantity) => {
+        console.log("change quantity", quantity);
+        if(quantity<1){
             dispatch(Remove_From_Cart(item))
+        }else{
+            dispatch(Change_Quantity(item.id, change))
         }
     }
 
     let totalAmount = 0;
     let totalPrice = 0;
-    data.forEach(item => {
-        totalAmount += +item.amount;
-        totalPrice += +item.price;
-    })
-
-    let price = 0;
-    let amount = 0;
-    quanData.forEach(item => {
-        price += +item.price;
-        amount += +item.amount;
+    Array.from(data.values()).forEach(({value, quantity}) => {
+        totalAmount += +value.amount*quantity;
+        totalPrice += +value.price*quantity;
     })
 
     return <div className="cart-container">
@@ -62,9 +45,7 @@ export const Cart = () => {
 
         <div className="cart-main-cont">
             <div className="cart-left-cont">
-                {data.map(item => {
-                    // let price = +item.price;
-                    // let amount = +item.amount;
+                {mapToArray(data).map(({value: item, quantity}) => {
                     return <div className="cart-left-top">
                         <div>
                             <div className='cart-move'>
@@ -79,16 +60,16 @@ export const Cart = () => {
                             <div className='cart-move'>
                                 <p onClick={() => RemoveCart(item)}><span><RiDeleteBin6Line /></span>&nbsp;REMOVE</p>
                                 <div className='cart-item-quantity'>
-                                    <button onClick={() => decreaseQuantity(item.img, item)}>-</button>
+                                    <button onClick={() => changeQuantity(item, -1, quantity)}>-</button>
                                     <input type='number' placeholder={quantity} disabled/>
-                                    <button onClick={() => increaseQuantity(item.img, item)}>+</button>
+                                    <button onClick={() => changeQuantity(item, 1, quantity)}>+</button>
                                 </div> 
                             </div>
                         </div>
                         <div className='cart-vertical-line'></div>
                         <div className='cart-right-top'>    
-                            <h3>&#8377;{item.price}</h3>
-                            <p className='cart-mrp'>MRP&nbsp; &#8377;<spna className='cart-price'>{amount} </spna><span className='cart-off'>&nbsp; 21%OFF</span></p>
+                            <h3>&#8377;{(item.price*quantity).toFixed(2)}</h3>
+                            <p className='cart-mrp'>MRP&nbsp; &#8377;<spna className='cart-price'>{item.amount*quantity} </spna><span className='cart-off'>&nbsp; 21%OFF</span></p>
                             <p>MRP Includes all taxes</p>
                             <p></p>
                         </div>

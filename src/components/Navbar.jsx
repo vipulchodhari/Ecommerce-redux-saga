@@ -1,12 +1,19 @@
 import { useSelector } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import cartLogo from '../assets/shopping-cart.png';
+import { mapToArray } from '../utils/common';
 
 export const Navbar = () => {
     const { data } = useSelector((state) => ({
         data: state.dataState.data
     }))
 
+    let _quantity = 0;
+    mapToArray(data).forEach(({quantity}) => {
+        _quantity += quantity
+
+        console.log('quantity', quantity);
+    })
 
     // console.log('redux data in cart', data);
     return( <div className='navbar-container'>
@@ -14,7 +21,7 @@ export const Navbar = () => {
             <h1 >Ecommerce</h1>
             <Link className='navbar-home' to='/'><p>Home</p></Link>
         </div>
-        <span>{data.length}</span>
+        <span>{_quantity}</span>
         <Link to='/cart'>< img className='cart-logo' src={cartLogo} alt='' /></Link>
         <Outlet/>
     </div>)

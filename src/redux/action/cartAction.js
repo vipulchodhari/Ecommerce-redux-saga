@@ -1,4 +1,4 @@
-import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART } from "./actionTypes"
+import { ADD_TO_CART, CHANGE_QUANTITY, EMPTY_CART, REMOVE_FROM_CART } from "./actionTypes"
 
 export const Add_To_Cart = (data) => {
     // console.log('add acton called', data);
@@ -13,6 +13,13 @@ export const Remove_From_Cart = (data) => {
     return{
         type: REMOVE_FROM_CART,
         payload: data
+    }
+}
+
+export const Change_Quantity = (id, change) => {
+    return{
+        type: CHANGE_QUANTITY,
+        payload: {id, change}
     }
 }
 
