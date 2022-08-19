@@ -1,0 +1,83 @@
+.edprime-help-container{
+    border: 1px solid black;
+    width: 30%;
+    height: 620px;
+    /* padding: 10px; */
+    border-radius: 15px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 224.2px;
+    margin-bottom: 50px;
+}
+.help-top-cont{
+    /* border: 1px solid red; */
+    background-image: linear-gradient(90deg, rgb(3, 122, 188), rgb(76, 183, 219));
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    border-radius: 15px 15px 0px 0px;
+}
+.help-top-text{
+    margin-left: 10px;
+}
+.help-top-text > p:nth-child(1){
+    margin-bottom: -16px;
+    font-weight: 700;
+}
+.help-top-text > p:nth-child(2){
+    font-size: 14px;
+    margin-left: -21px;
+}
+.help-top-logo{
+    display: flex;
+    justify-content: flex-end;
+}
+.help-top-logo > img{
+    width: 6%;
+    cursor: pointer;
+}
+.help-mid-cont{
+    margin-top: -230px;
+}
+.help-mid-time{
+    display: flex;
+    color: gray;
+    font-size: 10.3px;
+    letter-spacing: .5px;
+    gap: 5px;
+    margin-left: 23px;
+}
+.help-mid-text{
+    margin-left: 32px;
+}
+.help-mid-text > p{
+    text-align: left;
+    margin-bottom: 25px;
+}
+.help-down-cont{
+    /* border: 1px solid red; */
+    padding: 15px 10px;
+    background-color: rgb(253, 242, 242);
+    /* background-color: red; */
+    border-radius: 0px 0px 15px 15px;
+}
+.help-down-input{
+    display: flex;
+    /* border: 1px solid blue; */
+    height: 46px;
+}
+.help-down-input > input{
+    border: 1px solid rgb(24,140,197);
+    outline: 0px;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 600%;
+}
+.help-down-input > div > img{
+    width: 66%;
+    cursor: pointer;
+}
