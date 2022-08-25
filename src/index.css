@@ -26,3 +26,21 @@ code {
 .img-container img {
   display: none;
 }
+
+#kenytChatBubble.style1 {
+  top: 37px;
+  /* left: 79%; */
+  right: 300px !important;
+  box-shadow: none !important;
+}
+
+#kenytChatBubble.style1.k-hide #bubbleTail {
+  top: 47px !important;
+  transform: rotate(4deg) !important;
+  left: 46% !important;
+  /* display: none; */
+}
+
+#kenytChatBubble.style1 #bubbleTail {
+  bottom: 0px !important;
+}
