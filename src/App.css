@@ -38,7 +38,7 @@
 .navbar-heading > h1{
   color: rgb(48, 48, 48);
 }
-.navbar-home{
+.navbar-home, .navbar-help{
   margin-right: -50px;
   margin-left: 30px;
   margin-top: 5px;
@@ -47,7 +47,16 @@
   text-decoration: none;
   color: rgb(88, 88, 88);
 }
-.navbar-home:hover{
+.navbar-help{
+  margin-right: -120px;
+  margin-left: 65px;
+}
+.navbar-help > img{
+  height: 30px;
+  margin-top: 8px;
+  border-radius: 15px;
+}
+.navbar-home:hover, .navbar-help:hover{
   text-decoration: underline;
   color: rgb(48, 48, 48);
   transition: .3s ease;

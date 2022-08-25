@@ -63,7 +63,7 @@ const changeQuantity = (data, id, change) =>{
         quantity: prevQuantity+change
     })
 
-    if(change == 1){
+    if(change === 1){
         toast.info("Your cart quantity increase", {
             position: 'bottom-left'
         })

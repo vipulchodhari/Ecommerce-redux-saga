@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Add_To_Cart } from '../redux/action/cartAction';
 import { ProductList } from '../redux/action/productAction';
-import { matchCartData } from '../utils/common';
 
 export const Home = () => {
     const { data, cartData } = useSelector((state) => ({
